@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<meta name="author" content="Mahesh Gaya">
+<meta name="description" content="assignment 3">
+<title>Rotating Cross</title>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+attribute vec4 vPosition;
+uniform float xPosition;
+uniform float yPosition;
+uniform float theta;
+
+
+void main()
+{
+    float s = sin( theta );
+    float c = cos( theta );
+
+    gl_Position.x = (-s * vPosition.y + c * vPosition.x) + xPosition ;
+    gl_Position.y =  (s * vPosition.x + c * vPosition.y) + yPosition;
+    gl_Position.z = 0.0;
+    gl_Position.w = 2.0;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+uniform float red;
+uniform float green;
+uniform float blue;
+
+
+void main()
+{
+    gl_FragColor = vec4( red, green, blue, 1.0 );
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="assignment3.js"></script>
+</head>
+
+<body>
+  <h2 style="margin-left:200px;">Rotating Cross</h2>
+  <canvas id="gl-canvas" width="512" height="512" style="border-color: rgb(206, 208, 212);border-style:solid; margin-left:10px;">
+  Oops ... your browser doesn't support the HTML5 canvas element
+  </canvas>
+
+<div style="border-style: solid; border-width: 1px;
+width:40%; margin:10px; padding:10px; border-radius:5px;
+display: table; background-color: #FAFAFA;">
+  <div style="display: table-row">
+    <div style="width: 250px; display: table-cell;">
+      <div>
+        <button id="Direction"
+        style="margin-bottom: 10px; height:25px; border-color:rgb(206, 208, 212);
+        border-style:solid;  background-color:rgb(246, 247, 249) ;
+        color:#424242; border-radius:5px;">
+        Change Rotation Direction
+        </button>
+      </div>
+      <div>
+        <span style="color:#BF360C;">Press 'N' or 'n' for slower speed</span><br>
+        <span style="color:#BF360C;">Press 'M' or m' for faster speed</span><br>
+        Speed: <span id="speedText">0.2</span> &nbsp;<button id="ResetSpeed"
+        style="border-color:rgb(206, 208, 212);
+        border-style:solid;  background-color:rgb(246, 247, 249) ;
+        color:#424242; border-radius:3px;">
+        Reset Speed
+        </button><br>
+        Color: rgba(<span id="redText1" style="color: red;">1</span>,
+        <span id="greenText1" style="color: green;">0</span>,
+        <span id="blueText1" style="color: blue;">0</span>, 1.0)
+      </div>
+    </div>
+    <div style="display: table-cell;">
+      <div>
+      Red <input type="range" id="redColor" value="1.0" min="0.0" max="1.0" step="0.1"/> <span id="redText"></span>
+      </div>
+
+      <div>
+      Green <input type="range" id="greenColor" value="0.0" min="0.0" max="1.0" step="0.1"/> <span id="greenText"></span>
+      </div>
+
+      <div>
+      Blue <input type="range" id="blueColor" value="0.0" min="0.0" max="1.0" step="0.1"/> <span id="blueText"></span>
+      </div>
+
+      <div>
+        <select id="Controls" size="5" style="width:200px; background-color: WhiteSmoke; overflow:hidden; text-align:center;">
+            <option value="0">Reset</option>
+            <option value="1">Move to Top</option>
+            <option value="2">Move to Left</option>
+            <option value="3">Move to Right</option>
+            <option value="4">Move to Bottom</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

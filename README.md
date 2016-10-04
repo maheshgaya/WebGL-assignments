@@ -1,5 +1,7 @@
 # WebGL-assignments
-DU CS147 - WebGl - Computer Science
+###Drake University 
+
+CS147 - Computer Graphics - WebGL - Fall 2016
 
 These are my code assignments for a WebGL course at Drake University.
 
